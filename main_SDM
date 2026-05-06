@@ -1,0 +1,55 @@
+/SDM
+│
+├── README.md
+├── LICENSE
+├── LICENSING.md
+├── CONTRIBUTING.md
+├── MANIFESTO.md
+│
+├── /docs
+│   ├── framework
+│   │   ├── canonical-definitions.md
+│   │   ├── technical-architecture.md
+│   │   ├── orchestration-layer.md
+│   │   ├── material-warrants.md
+│   │   └── promotion-boundary.md
+│   │
+│   ├── disruptor-exchange
+│   │   ├── disruptor-1.md
+│   │   ├── disruptor-2.md
+│   │   ├── disruptor-3.md
+│   │   ├── exchange-sequence.md
+│   │   └── arbitration-model.md
+│   │
+│   ├── governance
+│   │   ├── sim-smk-separation.md
+│   │   ├── tag-system.md
+│   │   ├── bdrm-framework.md
+│   │   └── provenance-enforcement.md
+│   │
+│   └── licensing
+│       ├── conceptual-layer.md
+│       ├── operational-substrate.md
+│       └── commercial-use.md
+│
+├── /experiments
+│   ├── attention-replacement
+│   │   ├── run-a.md
+│   │   ├── run-b.md
+│   │   └── d3-arbitration.md
+│   │
+│   ├── fpga-design-space
+│   │   └── zc706-study.md
+│   │
+│   └── archived-dissent
+│
+├── /prompts
+│   └── disruptor-exchange-prompts-v1.md
+│
+├── /assets
+│   ├── diagrams
+│   ├── graphics
+│   └── landing-page
+│
+└── /site
+    └── landing-page.html
