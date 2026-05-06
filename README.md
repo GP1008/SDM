@@ -1,328 +1,249 @@
 # Structured Distance Measurement (SDM)
 
-A governed research framework for measuring the distance between radical ideas and empirical validation through adversarial multi-agent exchange, provenance enforcement, and human-in-the-loop governance.
+**A governed research framework for mapping the frontier between radical ideas and empirical validation.**
+
+> *"Truth without adversarial pressure is just consensus with better marketing."*
+
+**Author:** Gary Phillips — [ElosiaEcosystem Inc.](https://github.com/GP1008)
+**Status:** Open Research Architecture — Public Corpus
+**License:** Conceptual layer: [CC BY-NC 4.0](LICENSING.md) | Operational substrate: Proprietary
 
 ---
 
-# Overview
+## What This Is
 
-The Structured Distance Measurement (SDM) framework was developed to address a core limitation in modern research systems:
+The SDM framework was built to address a structural failure in modern research:
 
-> paradigm-shifting ideas are often filtered out before they can be properly evaluated.
+**Paradigm-shifting ideas are filtered out before they can be properly evaluated.**
 
-Most research pipelines optimize for:
-
-* reproducibility,
-* incremental improvement,
-* benchmark conformity,
-* and low-risk consensus.
+Most research pipelines optimize for reproducibility, incremental improvement, and benchmark conformity. This creates an invisible filtering mechanism where ideas that challenge current paradigms are discarded not because they are wrong — but because they perform poorly against metrics designed for the paradigm they are attempting to replace.
 
 SDM approaches the problem differently.
 
-Instead of asking:
+Instead of asking **"Is this idea correct?"** the framework asks:
 
-> “Is this idea immediately correct?”
+> **"How far is this idea from empirical validation — and what would it cost to close that gap?"**
 
-the framework asks:
-
-> “How far is this idea from empirical validation, and what would it cost to close that gap?”
-
-The result is not simply a recommendation engine or a multi-agent debate system.
-
-It is a cartographic instrument for mapping the frontier between:
-
-* theoretical possibility,
-* engineering feasibility,
-* and validated truth.
+The output is not a recommendation. It is a **Structured Distance Measurement** — a precise, historically durable map of the frontier between theoretical possibility and validated truth.
 
 ---
 
-# Core Thesis
+## Quick Start
 
-The primary artifact of the framework is not the proposal itself.
+**To explore the framework:**
 
-The artifact is the measured distance between:
+| Path | What You Get |
+|------|-------------|
+| [Read the White Paper](docs/white-paper.md) | Full conceptual framework — start here |
+| [Read the Manifesto](MANIFESTO.md) | Architecture philosophy and design principles |
+| [Explore the NotebookLM Corpus](https://notebooklm.google.com/notebook/0f50df41-0a1a-4b1d-b5b3-9fcf001c63ea) | Interrogate 31 source documents interactively |
+| [Read a Live Exchange](exchanges/) | See the framework operating on a real research question |
+| [Read the Canonical Definitions](docs/canonical-definitions.md) | Precise terminology used throughout |
+| [Understand the Licensing](LICENSING.md) | What is open, what is proprietary |
 
-* a coherent hypothesis,
-* and validated empirical reality.
+**To engage with the research:**
 
-This distance is treated as:
-
-* structured,
-* measurable,
-* historically durable,
-* and operationally actionable.
-
-As infrastructure changes, the proposal may evolve — but the measured gap remains valuable historical research context.
-
----
-
-# The Consensus Trap
-
-Modern research systems naturally converge toward:
-
-* safe optimization,
-* statistically dominant paradigms,
-* and benchmark-compatible outputs.
-
-This creates a structural filtering effect where:
-
-* non-linear tradeoffs,
-* cross-domain recombinations,
-* and paradigm-level shifts
-
-are often discarded before validation can occur.
-
-SDM was designed to create a governed environment where:
-
-* structured dissent,
-* adversarial pressure,
-* and controlled frontier exploration
-
-can survive long enough to reach human evaluation.
+- Open a [Discussion](https://github.com/GP1008/SDM/discussions) to challenge a concept
+- Submit an [Issue](https://github.com/GP1008/SDM/issues) to flag an inconsistency
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) for how to participate
 
 ---
 
-# The Disruptor Exchange
+## The Core Problem — The Consensus Trap
 
-The framework uses a structured three-role adversarial exchange.
+Modern research systems are structurally biased toward safe convergence.
 
-## Disruptor-1 (D1) — Radical Proposer
+- Academic publication rewards reproducibility over risk
+- Benchmarks reward optimization against existing paradigms
+- AI systems optimize statistical confidence against prior distributions
+- Corporate pipelines optimize for predictable returns
 
-D1 recombines existing tools, theories, and structures into coherent but premature proposals.
+The consequence: ideas that challenge foundational assumptions are filtered out before they can be meaningfully explored — not because they are wrong, but because the evaluation system was built by the paradigm they are challenging.
 
-Its role is not randomness.
+The SDM framework treats this as a **structural problem**, not a model-quality problem.
 
-Its role is disciplined frontier exploration.
-
-D1 intentionally challenges foundational assumptions while remaining logically coherent and experimentally discussable.
-
----
-
-## Disruptor-2 (D2) — Dialectical Challenger
-
-D2 identifies:
-
-* hidden assumptions,
-* structural dependencies,
-* paradigm leakage,
-* and logical blind spots
-
-inside D1’s proposal.
-
-D2 does not merely critique.
-
-It advances a competing framework or alternate interpretation designed to force paradigm separation.
+Instead of forcing convergence, the framework creates **controlled adversarial pressure** between competing interpretations — and preserves the full reasoning record of that pressure as a durable research artifact.
 
 ---
 
-## Disruptor-3 (D3) — Empirical Arbiter
+## The Disruptor Exchange
 
-D3 is anchored to current engineering and scientific reality.
+At the center of the framework is a structured three-role adversarial exchange.
 
-Its role is not philosophical synthesis.
+### Disruptor-1 — The Radical Proposer
 
-Its role is measurement.
+D1 recombines existing tools, theories, and structures into coherent but premature proposals. Its role is disciplined frontier exploration — not randomness. Every proposal must be logically coherent, source-linked, and include a minimal testable experiment. Speculation without a validation path is not an output.
 
-D3 evaluates:
+### Disruptor-2 — The Dialectical Challenger
 
-* empirical grounding,
-* engineering feasibility,
-* infrastructure requirements,
-* and validation cost.
+D2 does not merely critique D1. It identifies the hidden assumption D1 failed to escape — then advances a competing proposal from a fundamentally different paradigm. The goal is forced paradigm separation, not debate performance. A critique without a counter-proposal is an incomplete output.
 
-The output is a Structured Distance Measurement (SDM):
+### Disruptor-3 — The Empirical Arbiter
 
-* the precise gap between the proposal and practical validation.
+D3 is anchored to current engineering reality. Its role is not philosophical synthesis — it is measurement. D3 evaluates both proposals against empirical grounding, engineering feasibility, and validation cost. The output is a **Structured Distance Measurement**: the precise gap between each proposal and practical validation.
 
----
+> D3 measures distance. It does not decide whether the distance is worth crossing. That decision belongs to the human.
 
-# The Infrastructure of Integrity
+### The Five-Step Exchange Loop
 
-## Deterministic Orchestration Layer
-
-The orchestration layer performs exactly five functions:
-
-* route packages,
-* enforce role order,
-* preserve provenance,
-* trigger execution,
-* and record movement.
-
-It does not:
-
-* summarize,
-* reinterpret,
-* filter,
-* rank,
-* or reason.
-
-This prevents hidden bias injection through orchestration logic.
+```
+Step 1 — D1 Proposal
+Step 2 — D2 Review + Counter-Proposal
+Step 3 — D1 Review Notes (original proposal hash-locked)
+Step 4 — Package Assembly (Orchestration Layer only — no interpretation)
+Step 5 — D3 Empirical Arbitration
+         ↓
+         Human-in-the-Loop Review
+         ↓
+         APPROVE → System Memory
+         RETURN  → Exchange (targeted revision)
+         ARCHIVE → Dissent Archive
+         ESCALATE → Governance Review
+```
 
 ---
 
-## Private Research Environments
+## The Infrastructure of Integrity
 
-Each agent operates inside an isolated notebook corpus.
+### No Source, No Claim
 
-Research environments are:
+Every substantive claim must carry a Material Warrant — a typed, source-locked, provenance-chained claim record. Unsourced claims are blocked at the exchange boundary. They do not reach the next agent. There is no flag-and-pass path.
 
-* private,
-* zero-trust,
-* provenance-dependent,
-* and structurally isolated.
+### Deterministic Orchestration
 
-Agents cannot read each other’s working notebooks.
+The orchestration layer performs exactly five functions: route packages, enforce role order, preserve provenance, trigger execution, and record movement. It does not summarize, interpret, filter, rank, or reason. Any orchestrator that interprets content becomes an undeclared fourth agent — introducing bias that cannot be audited.
 
-Only formally routed exchange artifacts cross boundaries.
+### Private Research Environments
 
----
+Each agent maintains its own isolated research notebook. Agents cannot read each other's working research. The only material that crosses agent boundaries is what the orchestration layer explicitly passes as structured exchange artifacts.
 
-## Material Warrants
+### The Promotion Boundary
 
-Every substantive claim must carry:
+The Human-in-the-Loop layer is the only authority that can convert validated reasoning into system memory. No automated process — regardless of confidence score or model consensus — can bypass this boundary.
 
-* traceable source attribution,
-* typed classification,
-* provenance lineage,
-* and confidence enumeration.
-
-No source → no claim.
-
-This prevents unsupported assertions from propagating across exchange boundaries.
+> The system measures the frontier. The human decides which distances are worth crossing.
 
 ---
 
-## The Promotion Boundary
+## Memory Architecture
 
-The Human-in-the-Loop (HITL) layer is the only authority capable of converting exploration material into validated system memory.
+### SIM — System of Information Management
 
-No automated process can promote reasoning into truth.
+Per-agent long-term memory. Stores validated outcomes, historical patterns, and agent-specific knowledge accumulated across runs. Append-only, governed by HITL approval events exclusively. Agents cannot write to SIM directly.
 
-The system produces:
+### SMK — System of Material Knowledge
 
-* structured research artifacts,
-* validation measurements,
-* and provenance-linked evidence.
+The system-wide governance layer. Defines role expectations, orchestration constraints, behavioral mandates, and structural boundaries. Not a research database — a constitutional layer. Agents read it at initialization to orient their role. They do not consult it during active research.
 
-The human determines:
-
-* whether the measured distance is worth crossing.
+> SIM accumulates experience. SMK enforces alignment. They do not exchange data.
 
 ---
 
-# SIM and SMK
+## Structured Dissent
 
-## SIM — System of Information Management
+Rejected and unresolved proposals are not discarded. They enter the **Dissent Archive** — a structured preservation system with three functions:
 
-Per-agent long-term memory.
+- **Temporal reference** — ideas archived as premature today may become viable as infrastructure evolves
+- **Calibration signal** — patterns in archived proposals reveal systematic tendencies in the system's evaluation criteria
+- **Cross-run analysis** — enables comparison of how different model-role configurations approach the same research domain
 
-Stores:
-
-* validated successes,
-* historical outcomes,
-* and agent career records.
-
-SIM is append-only and governed by HITL approval events.
+The archive accumulates not just knowledge, but the history of how knowledge was evaluated. That history grows more valuable as the world changes around it.
 
 ---
 
-## SMK — System of Material Knowledge
+## Behavioral Governance
 
-The system-wide governance and structural alignment layer.
+The framework is governed by a domain-agnostic behavioral enforcement substrate whose founding principle is:
 
-SMK defines:
+> **The pattern stays the same. The output changes.**
 
-* role expectations,
-* orchestration boundaries,
-* governance standards,
-* and structural constraints.
-
-Agents do not use SMK as a research source.
-
-It exists to prevent drift — not generate answers.
+The same five-layer enforcement pattern that governs agent behavior in a research exchange also governs servicer behavior in financial compliance, provider behavior in healthcare authorization, and employee behavior in enterprise governance. The actor changes. The domain vocabulary changes. The enforcement pattern does not.
 
 ---
 
-# Structured Dissent
+## Proof of Concept
 
-Rejected or unresolved proposals are not discarded.
+### FPGA Design Space Exploration
 
-They enter the Dissent Archive.
+Applied to FPGA resource allocation for edge AI CNN deployment. The exchange surfaced a critical BRAM saturation anomaly at 25-thread configurations — a counter-intuitive non-linear trade-off that conventional optimization pipelines consistently missed. The dissent archive produced an auditable record of rejected configurations satisfying ISO 42001 Clause 9 transparency requirements.
 
-The archive preserves:
+### Attention Mechanism Replacement — Live Exchange Runs
 
-* anomaly vectors,
-* failed paradigms,
-* premature ideas,
-* and unresolved tensions
+Two complete Disruptor Exchange runs with different model-role permutations explored competing paradigms for replacing transformer attention. Full transcripts are in the [`/exchanges`](exchanges/) folder.
 
-for future reinterpretation as technology evolves.
+**Run A:** Recursive Binding Propagation (D1) vs Continuous Attractor Dynamics (D2)
+**Run B:** Same question, rotated model assignments
 
----
+**Cross-run finding:** Both permutations independently produced the same paradigm split — discrete-structural versus continuous-dynamic computation — confirming the split as a genuine feature of the problem space rather than a model artifact.
 
-# Proof of Concept
-
-The framework has been exercised against multiple exploratory research scenarios, including:
-
-* FPGA Design Space Exploration (DSE)
-* BRAM saturation anomaly analysis
-* Attention mechanism replacement exchanges
-* Discrete structural vs continuous dynamic paradigm evaluations
-
-These runs demonstrated the framework’s ability to surface:
-
-* non-linear tradeoffs,
-* hidden assumptions,
-* and validation-distance measurements
-
-that conventional linear optimization pipelines frequently miss.
+**Calibration finding:** The Empirical Arbiter role systematically weighted engineering tractability over paradigm depth. This is documented as an open governance question: the D3 evaluation criteria may need adjustment for domains where paradigm depth matters more than near-term feasibility.
 
 ---
 
-# Strategic Position
+## Known Limitations
 
-SDM is not intended to replace scientific rigor.
+The framework is presented with its failure modes named explicitly.
 
-It is intended to improve:
-
-* frontier exploration,
-* structured adversarial reasoning,
-* provenance integrity,
-* and governed paradigm evaluation.
-
-The framework attempts to create conditions where:
-
-* premature but coherent ideas
-  can survive long enough
-  to be measured properly.
+| Limitation | Description |
+|-----------|-------------|
+| **Shared Blind Spots** | All participating models may share training-embedded assumptions the exchange cannot surface |
+| **Arbiter Calibration** | D3 evaluates against a moving empirical target — its judgment is point-in-time, not permanent |
+| **Systematic Bias** | Live runs revealed D3 may systematically favor tractability over paradigm depth |
+| **Human Bottleneck** | HITL review creates scaling constraints — this is a feature, not a flaw |
+| **Corpus Pollution** | Open research environments accumulate low-quality material; provenance enforcement is the primary defense |
+| **No Breakthrough Guarantee** | The framework raises the ceiling. It does not guarantee what exists beyond it |
 
 ---
 
-# Licensing
+## Repository Structure
 
-This repository contains conceptual research materials released under a modified open research framework.
-
-Conceptual framework materials are released under:
-
-Creative Commons Attribution–NonCommercial 4.0 International (CC BY-NC 4.0)
-
-See:
-
-* `LICENSING.md`
-
-for full licensing terms and operational substrate restrictions.
-
-Production governance infrastructure, orchestration systems, runtime enforcement layers, and operational implementations remain proprietary to ElosiaEcosystem Inc.
+```
+SDM/
+├── README.md                    ← This file
+├── MANIFESTO.md                 ← Open Research Architecture Overview
+├── LICENSING.md                 ← Licensing framework and proprietary boundary
+├── CONTRIBUTING.md              ← How to participate
+├── docs/
+│   ├── white-paper.md           ← Full conceptual framework v1.0
+│   ├── canonical-definitions.md ← Precise terminology definitions
+│   └── technical-architecture.md← System architecture overview
+└── exchanges/
+    ├── README.md                ← Exchange format guide
+    ├── run-a-attention-mechanism.md  ← Live exchange Run A
+    └── run-b-attention-mechanism.md  ← Live exchange Run B
+```
 
 ---
 
-# Attribution
+## Engage With the Corpus
 
-Gary Phillips
+The full source corpus — including architecture specifications, exchange transcripts, and supporting documents — is available for interactive interrogation via NotebookLM:
+
+**[→ Open the Elosia SDM NotebookLM Corpus](https://notebooklm.google.com/notebook/0f50df41-0a1a-4b1d-b5b3-9fcf001c63ea)**
+
+This is the recommended starting point for deep engagement with the framework. You can ask questions, trace concepts across documents, and interrogate specific architectural decisions directly.
+
+---
+
+## Licensing
+
+**Conceptual layer** — released under [Creative Commons Attribution–NonCommercial 4.0 International (CC BY-NC 4.0)](LICENSING.md)
+
+This includes: the SDM thesis, the Disruptor Exchange model, the Consensus Trap theory, the Recursive Creativity framework, and all conceptual architectural descriptions.
+
+**Operational substrate** — proprietary to ElosiaEcosystem Inc.
+
+This includes: orchestration runtime systems, BDRM enforcement substrate, MicroManager/TAG infrastructure, SIM/SMK technical architecture, and all production governance implementation layers.
+
+See [LICENSING.md](LICENSING.md) for complete terms.
+
+---
+
+## Attribution
+
+**Gary Phillips**
 ElosiaEcosystem Inc.
-
 Structured Distance Measurement (SDM) Framework
+May 2026
 
-“Truth without adversarial pressure is just consensus with better marketing.”
-
+*Conceptual framework materials may be used for academic research, educational discussion, and non-commercial adaptation with attribution.*
