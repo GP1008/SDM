@@ -5,212 +5,428 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Structured Distance Measurement — an open research framework that maps the frontier between theoretical possibility and validated truth.">
   <title>Elosia SDM — Structured Distance Measurement</title>
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #0A0C10;
-      --ink2: #1A1E28;
-      --ink3: #2D3345;
-      --fog: #8A93A8;
-      --line: rgba(138,147,168,0.18);
-      --gold: #C9A84C;
-      --gold2: #EDD07A;
-      --green: #2ECC8A;
-      --red: #E05A5A;
-      --amber: #E09B3A;
-      --blue: #5B8DEF;
-      --surface: rgba(255,255,255,0.03);
-      --surface2: rgba(255,255,255,0.06);
+      --bg: #0a0d14;
+      --bg2: #0f1520;
+      --bg3: #141c2e;
+      --surface: #151d2e;
+      --surface2: #1a2540;
+      --border: rgba(255,255,255,0.07);
+      --border-active: rgba(168,240,240,0.35);
+      --text: #e8ecf4;
+      --text-dim: #7a8ba8;
+      --text-dimmer: #435068;
+      --gold: #a8f0f0;
+      --gold-dim: rgba(168,240,240,0.12);
+      --gold-glow: rgba(168,240,240,0.06);
+      --teal: #3dd6c4;
+      --teal-dim: rgba(61,214,196,0.12);
+      --red: #ff5e5e;
+      --red-dim: rgba(255,94,94,0.1);
+      --blue: #5b8fff;
+      --blue-dim: rgba(91,143,255,0.12);
+      --green: #3dd6c4;
     }
 
-    body { background: var(--ink); color: #E8ECF5; font-family: 'DM Mono', monospace; overflow-x: hidden; }
+    html { scroll-behavior: smooth; }
 
-    .page { max-width: 900px; margin: 0 auto; padding: 0 32px 80px; }
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+    }
 
     /* NAV */
     nav {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 24px 32px; border-bottom: 1px solid var(--line);
-      position: sticky; top: 0; background: rgba(10,12,16,0.95);
-      backdrop-filter: blur(12px); z-index: 100; max-width: 100%;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(10,13,20,0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
-    .logo span { color: #E8ECF5; font-weight: 400; }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.1em;
+      color: var(--gold);
+    }
+    .nav-logo span { color: var(--text-dim); font-weight: 300; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { color: var(--fog); font-size: 12px; text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
-    .nav-links a:hover { color: #E8ECF5; }
-    .nav-cta { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.1em; color: var(--ink); background: var(--gold); padding: 8px 18px; border-radius: 4px; text-decoration: none; transition: background 0.2s; }
-    .nav-cta:hover { background: var(--gold2); }
+    .nav-links a {
+      font-size: 13px; font-weight: 400; color: var(--text-dim);
+      text-decoration: none; letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 2px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-badge:hover { border-color: var(--gold); color: var(--gold); }
 
     /* HERO */
-    .hero { padding: 100px 0 80px; }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid rgba(201,168,76,0.3); border-radius: 100px;
-      padding: 6px 14px; font-size: 11px; letter-spacing: 0.12em;
-      color: var(--gold); margin-bottom: 40px;
+    .hero-wrap { position: relative; overflow: hidden; }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+      opacity: 0.05;
     }
-    .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+    .hero-grid::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(to right, var(--gold) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--gold) 1px, transparent 1px);
+      background-size: 80px 80px;
+      background-position: -40px -40px;
+    }
+    .hero-dot {
+      position: absolute; right: 80px; top: 50%;
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(168,240,240,0.05) 0%, transparent 70%);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 48px 80px;
+      max-width: 1200px; margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); animation: pulse 2s infinite; flex-shrink: 0;
+    }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-    .hero h1 {
-      font-family: 'Syne', sans-serif; font-weight: 800;
-      font-size: clamp(38px, 5vw, 64px); line-height: 1.05;
-      letter-spacing: -0.02em; margin-bottom: 28px;
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: 1.05;
+      color: var(--text);
+      max-width: 820px;
+      margin-bottom: 28px;
     }
-    .hero h1 em { font-style: normal; color: var(--gold); }
+    h1 em { font-style: italic; color: var(--gold); }
 
-    .hero-sub { font-size: 16px; line-height: 1.75; color: var(--fog); max-width: 580px; margin-bottom: 48px; font-family: 'DM Mono', monospace; font-weight: 300; }
+    .hero-sub {
+      font-size: 18px; font-weight: 300; color: var(--text-dim);
+      max-width: 560px; line-height: 1.65; margin-bottom: 48px;
+    }
 
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 80px; }
-    .btn-primary { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.08em; color: var(--ink); background: var(--gold); padding: 14px 28px; border-radius: 4px; text-decoration: none; transition: all 0.2s; }
-    .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
-    .btn-secondary { font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.06em; color: #E8ECF5; background: var(--surface2); border: 1px solid var(--line); padding: 14px 28px; border-radius: 4px; text-decoration: none; transition: all 0.2s; }
-    .btn-secondary:hover { border-color: rgba(138,147,168,0.4); background: rgba(255,255,255,0.08); }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: #0a0d14;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.03em;
+      padding: 14px 28px; border-radius: 3px;
+      border: none; cursor: pointer; text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--text-dim);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px; font-weight: 400;
+      padding: 14px 28px; border-radius: 3px;
+      border: 1px solid var(--border); cursor: pointer; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
 
     /* DISTANCE METER */
     .distance-meter {
-      border: 1px solid var(--line); border-radius: 8px;
-      background: var(--surface); padding: 24px; margin-bottom: 80px;
+      border: 1px solid var(--border); border-radius: 4px;
+      background: var(--surface); padding: 24px;
+      max-width: 700px;
     }
-    .dm-label { font-size: 10px; letter-spacing: 0.15em; color: var(--fog); margin-bottom: 16px; text-transform: uppercase; }
-    .dm-track { position: relative; height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; margin-bottom: 12px; }
-    .dm-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--green), var(--gold), var(--red)); width: 68%; transition: width 1s ease; }
-    .dm-marker { position: absolute; top: -4px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); border: 2px solid var(--ink); left: calc(68% - 8px); transition: left 1s ease; }
-    .dm-gaps { display: flex; gap: 8px; }
-    .dm-gap { flex: 1; font-size: 10px; letter-spacing: 0.08em; color: var(--fog); padding: 8px 10px; background: rgba(255,255,255,0.04); border-radius: 4px; border: 1px solid var(--line); cursor: default; transition: all 0.2s; }
-    .dm-gap:hover { border-color: rgba(201,168,76,0.4); color: var(--gold2); }
-    .dm-gap strong { display: block; color: #E8ECF5; font-size: 11px; margin-bottom: 3px; font-family: 'Syne', sans-serif; font-weight: 600; }
+    .dm-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.15em; color: var(--text-dimmer);
+      margin-bottom: 16px; text-transform: uppercase;
+    }
+    .dm-track { position: relative; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; margin-bottom: 12px; }
+    .dm-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--teal), var(--gold), var(--red)); width: 68%; }
+    .dm-marker { position: absolute; top: -5px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg); left: calc(68% - 8px); }
+    .dm-gaps { display: flex; gap: 8px; margin-top: 12px; }
+    .dm-gap {
+      flex: 1; font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.06em; color: var(--text-dimmer);
+      padding: 8px 10px; background: rgba(255,255,255,0.03);
+      border-radius: 3px; border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .dm-gap:hover { border-color: rgba(168,240,240,0.3); color: var(--gold); }
+    .dm-gap strong { display: block; color: var(--text-dim); font-size: 11px; margin-bottom: 3px; font-family: 'Instrument Sans', sans-serif; font-weight: 500; }
 
-    /* SECTION */
-    section { padding: 80px 0; border-top: 1px solid var(--line); }
-    .section-tag { font-size: 10px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
-    .section-h { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(26px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px; }
-    .section-sub { font-size: 15px; line-height: 1.8; color: var(--fog); max-width: 600px; margin-bottom: 48px; font-weight: 300; }
+    /* SECTION BASE */
+    .section-wrap { max-width: 1200px; margin: 0 auto; padding: 96px 48px; }
+    .divider { width: 100%; max-width: 1200px; margin: 0 auto; height: 1px; background: var(--border); }
 
-    /* CONSENSUS TRAP */
-    .trap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--text-dimmer); margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height: 1.12; color: var(--text);
+      margin-bottom: 16px;
+    }
+    h2 em { font-style: italic; color: var(--gold); }
+
+    .section-lead {
+      font-size: 16px; font-weight: 300; color: var(--text-dim);
+      max-width: 560px; line-height: 1.7; margin-bottom: 48px;
+    }
+
+    /* TRAP GRID */
+    .trap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .trap-card {
-      padding: 24px; border-radius: 6px; border: 1px solid var(--line);
+      padding: 28px; border-radius: 4px; border: 1px solid var(--border);
       background: var(--surface);
     }
-    .trap-card.bad { border-color: rgba(224,90,90,0.25); background: rgba(224,90,90,0.05); }
-    .trap-card.good { border-color: rgba(46,204,138,0.25); background: rgba(46,204,138,0.05); }
-    .trap-card-label { font-size: 10px; letter-spacing: 0.15em; margin-bottom: 12px; text-transform: uppercase; }
+    .trap-card.bad { border-top: 2px solid var(--red); background: rgba(255,94,94,0.04); }
+    .trap-card.good { border-top: 2px solid var(--teal); background: rgba(61,214,196,0.04); }
+    .trap-card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.15em; margin-bottom: 14px; text-transform: uppercase;
+    }
     .trap-card.bad .trap-card-label { color: var(--red); }
-    .trap-card.good .trap-card-label { color: var(--green); }
-    .trap-card p { font-size: 14px; line-height: 1.7; color: var(--fog); font-weight: 300; }
-    .trap-card strong { color: #E8ECF5; font-weight: 400; }
+    .trap-card.good .trap-card-label { color: var(--teal); }
+    .trap-card p { font-size: 14px; line-height: 1.7; color: var(--text-dim); font-weight: 300; }
+    .trap-card strong { color: var(--text); font-weight: 500; }
 
-    /* AGENTS */
+    /* WHISPER QUOTE */
+    .whisper-banner {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 40px 48px;
+      max-width: 1104px; margin: 0 auto 0;
+    }
+    .whisper-quote {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      line-height: 1.4; color: var(--text);
+      margin-bottom: 16px;
+    }
+    .whisper-attr {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--text-dimmer);
+    }
+
+    /* AGENTS GRID */
     .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .agent-card {
-      padding: 28px 24px; border-radius: 6px; border: 1px solid var(--line);
+      padding: 28px 24px; border-radius: 4px; border: 1px solid var(--border);
       background: var(--surface); position: relative; overflow: hidden;
+      transition: background 0.2s;
     }
-    .agent-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    }
+    .agent-card:hover { background: var(--surface2); }
+    .agent-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
     .agent-card.d1::before { background: var(--blue); }
-    .agent-card.d2::before { background: var(--amber); }
-    .agent-card.d3::before { background: var(--green); }
-    .agent-id { font-size: 10px; letter-spacing: 0.2em; margin-bottom: 6px; text-transform: uppercase; }
+    .agent-card.d2::before { background: var(--gold); }
+    .agent-card.d3::before { background: var(--teal); }
+    .agent-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.2em; margin-bottom: 8px; text-transform: uppercase;
+    }
     .agent-card.d1 .agent-id { color: var(--blue); }
-    .agent-card.d2 .agent-id { color: var(--amber); }
-    .agent-card.d3 .agent-id { color: var(--green); }
-    .agent-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 12px; }
-    .agent-desc { font-size: 13px; line-height: 1.7; color: var(--fog); font-weight: 300; }
-    .agent-method { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; color: var(--fog); letter-spacing: 0.04em; }
-    .agent-method span { color: #E8ECF5; }
+    .agent-card.d2 .agent-id { color: var(--gold); }
+    .agent-card.d3 .agent-id { color: var(--teal); }
+    .agent-name { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 12px; }
+    .agent-desc { font-size: 13px; line-height: 1.7; color: var(--text-dim); font-weight: 300; }
+    .agent-method {
+      margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; color: var(--text-dimmer); letter-spacing: 0.06em;
+    }
+    .agent-method span { color: var(--text-dim); }
 
     /* EXCHANGE FLOW */
-    .exchange-flow { display: flex; align-items: center; gap: 0; margin: 40px 0; overflow-x: auto; padding-bottom: 8px; }
+    .exchange-flow { display: flex; align-items: center; overflow-x: auto; padding: 32px 0 8px; gap: 0; }
     .ex-step { flex-shrink: 0; text-align: center; }
-    .ex-step-num { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--fog); margin: 0 auto 8px; font-family: 'Syne', sans-serif; font-weight: 600; }
-    .ex-step-num.active { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.1); }
-    .ex-step-label { font-size: 11px; color: var(--fog); max-width: 80px; line-height: 1.4; }
-    .ex-arrow { flex-shrink: 0; width: 40px; text-align: center; color: var(--line); font-size: 18px; }
+    .ex-step-num {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--text-dimmer); margin: 0 auto 8px;
+    }
+    .ex-step-num.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+    .ex-step-num.hitl { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
+    .ex-step-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dimmer); max-width: 80px; line-height: 1.4; letter-spacing: 0.04em; }
+    .ex-arrow { flex-shrink: 0; width: 40px; text-align: center; color: var(--text-dimmer); font-size: 16px; }
 
-    /* TRUTH EARNED */
-    .truth-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-    .truth-step { padding: 24px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); }
-    .truth-step-n { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 36px; color: var(--gold); opacity: 0.3; margin-bottom: 8px; }
-    .truth-step-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 14px; margin-bottom: 8px; }
-    .truth-step-desc { font-size: 13px; line-height: 1.7; color: var(--fog); font-weight: 300; }
-
-    /* BDRM */
-    .bdrm-layers { display: flex; flex-direction: column; gap: 8px; }
+    /* BDRM STACK */
+    .bdrm-stack { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
     .bdrm-layer {
-      display: flex; align-items: center; gap: 20px;
-      padding: 16px 20px; border-radius: 4px; border: 1px solid var(--line);
-      background: var(--surface); transition: all 0.2s; cursor: default;
+      display: flex; align-items: center; gap: 0;
+      background: var(--surface); transition: background 0.2s;
     }
-    .bdrm-layer:hover { border-color: rgba(201,168,76,0.3); background: var(--surface2); }
-    .bdrm-n { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 11px; color: var(--gold); letter-spacing: 0.1em; min-width: 32px; }
-    .bdrm-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 13px; min-width: 100px; }
-    .bdrm-tagline { font-size: 12px; color: var(--fog); font-weight: 300; font-style: italic; }
-    .bdrm-founder { margin-top: 32px; padding: 20px 24px; border-radius: 6px; border: 1px solid rgba(201,168,76,0.25); background: rgba(201,168,76,0.05); font-size: 14px; line-height: 1.7; color: var(--fog); }
-    .bdrm-founder strong { color: var(--gold2); font-weight: 400; font-style: italic; }
+    .bdrm-layer + .bdrm-layer { border-top: 1px solid var(--border); }
+    .bdrm-layer:hover { background: var(--surface2); }
+    .bdrm-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+      color: var(--gold); padding: 20px 24px;
+      border-right: 1px solid var(--border); min-width: 64px;
+    }
+    .bdrm-name { padding: 20px 24px; font-size: 14px; font-weight: 500; color: var(--text); border-right: 1px solid var(--border); min-width: 120px; }
+    .bdrm-tagline { padding: 20px 24px; font-size: 13px; font-weight: 300; color: var(--text-dim); font-style: italic; }
 
-    /* PROOF */
+    .bdrm-founder {
+      margin-top: 24px; padding: 24px 28px;
+      border: 1px solid var(--border); border-left: 3px solid var(--gold);
+      background: var(--bg2);
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px; line-height: 1.5; color: var(--text);
+    }
+    .bdrm-founder-attr {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-dimmer); margin-top: 12px;
+      font-style: normal;
+    }
+
+    /* TRUTH GRID */
+    .truth-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .truth-step { padding: 28px; border-radius: 4px; border: 1px solid var(--border); background: var(--surface); }
+    .truth-step-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.2em; color: var(--gold);
+      margin-bottom: 12px; text-transform: uppercase;
+    }
+    .truth-step-title { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 10px; }
+    .truth-step-desc { font-size: 13px; line-height: 1.7; color: var(--text-dim); font-weight: 300; }
+
+    /* PROOF CARDS */
     .proof-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .proof-card { padding: 28px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); }
-    .proof-domain { font-size: 10px; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
-    .proof-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 12px; }
-    .proof-desc { font-size: 13px; line-height: 1.7; color: var(--fog); font-weight: 300; }
-    .proof-finding { margin-top: 16px; padding: 12px 14px; border-radius: 4px; background: rgba(46,204,138,0.06); border: 1px solid rgba(46,204,138,0.2); font-size: 12px; color: var(--green); line-height: 1.6; }
-
-    /* CALL TO ACTION */
-    .cta-block {
-      padding: 60px; border-radius: 8px;
-      border: 1px solid rgba(201,168,76,0.25);
-      background: rgba(201,168,76,0.04);
-      text-align: center;
+    .proof-card { padding: 28px; border-radius: 4px; border: 1px solid var(--border); background: var(--surface); transition: background 0.2s; }
+    .proof-card:hover { background: var(--surface2); }
+    .proof-domain {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.15em; color: var(--gold);
+      margin-bottom: 10px; text-transform: uppercase;
     }
-    .cta-block h2 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 38px); margin-bottom: 16px; }
-    .cta-block p { font-size: 15px; color: var(--fog); max-width: 500px; margin: 0 auto 36px; line-height: 1.8; font-weight: 300; }
-    .cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .proof-title { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 12px; }
+    .proof-desc { font-size: 13px; line-height: 1.7; color: var(--text-dim); font-weight: 300; }
+    .proof-finding {
+      margin-top: 16px; padding: 12px 14px; border-radius: 3px;
+      background: rgba(61,214,196,0.05); border: 1px solid rgba(61,214,196,0.2);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--teal); line-height: 1.6;
+    }
 
-    /* QUOTE */
-    .quote-block { padding: 48px 0; text-align: center; }
-    .quote-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(18px, 2.5vw, 28px); color: var(--gold); font-style: italic; letter-spacing: -0.01em; line-height: 1.4; }
-    .quote-attr { font-size: 12px; color: var(--fog); margin-top: 16px; letter-spacing: 0.1em; }
+    /* CTA */
+    .cta-section {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 96px 48px; text-align: center;
+    }
+    .cta-section h2 { margin: 0 auto 16px; max-width: 600px; }
+    .cta-section .section-lead { margin: 0 auto 48px; max-width: 480px; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* TAGS */
+    .tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 2px;
+      background: var(--gold-dim); color: var(--gold);
+      border: 1px solid rgba(168,240,240,0.2);
+    }
+    .tag-teal { background: var(--teal-dim); color: var(--teal); border-color: rgba(61,214,196,0.2); }
+    .tag-blue { background: var(--blue-dim); color: var(--blue); border-color: rgba(91,143,255,0.2); }
 
     /* FOOTER */
-    footer { border-top: 1px solid var(--line); padding: 40px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--fog); }
-    .footer-logo { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; }
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--text-dimmer); letter-spacing: 0.06em;
+    }
 
-    @media (max-width: 640px) {
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .section-wrap { padding: 64px 24px; }
+      .hero { padding: 100px 24px 64px; }
+      .whisper-banner { padding: 28px 24px; }
       .trap-grid, .agents-grid, .truth-grid, .proof-cards { grid-template-columns: 1fr; }
-      nav .nav-links { display: none; }
-      .cta-block { padding: 36px 24px; }
+      .cta-section { padding: 64px 24px; }
+      footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+      .bdrm-layer { flex-direction: column; align-items: flex-start; }
+      .bdrm-name, .bdrm-tagline { border: none; padding: 4px 24px; }
+      .bdrm-name { padding-top: 0; }
+      .bdrm-tagline { padding-bottom: 16px; }
     }
   </style>
 </head>
-
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="logo">Elosia <span>/ SDM</span></div>
+  <div class="nav-logo">Elosia <span>/ SDM</span></div>
   <ul class="nav-links">
     <li><a href="#framework">Framework</a></li>
     <li><a href="#exchange">Exchange</a></li>
     <li><a href="#proof">Proof</a></li>
     <li><a href="https://github.com/GP1008/SDM">GitHub</a></li>
   </ul>
-  <a href="https://github.com/GP1008/SDM" class="nav-cta">Explore →</a>
+  <a href="https://github.com/GP1008/SDM" class="nav-badge">Explore →</a>
 </nav>
 
-<div class="page">
-
-  <!-- HERO -->
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="hero-grid"></div>
+  <div class="hero-dot"></div>
   <div class="hero">
-    <div class="hero-tag">
-      <div class="hero-tag-dot"></div>
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
       Open Research Framework — v1.0
     </div>
     <h1>The map is<br>the <em>artifact.</em></h1>
@@ -220,11 +436,11 @@
     </p>
     <div class="hero-actions">
       <a href="https://github.com/GP1008/SDM" class="btn-primary">Read the Framework</a>
-      <a href="https://notebooklm.google.com/notebook/0f50df41-0a1a-4b1d-b5b3-9fcf001c63ea" class="btn-secondary">Interrogate the Corpus ↗</a>
+      <a href="https://notebooklm.google.com/notebook/0f50df41-0a1a-4b1d-b5b3-9fcf001c63ea" class="btn-ghost">Interrogate the Corpus ↗</a>
     </div>
 
     <div class="distance-meter">
-      <div class="dm-label">Live SDM Output — Attention Mechanism Replacement (Run A)</div>
+      <div class="dm-label">// Live SDM Output — Attention Mechanism Replacement (Run A)</div>
       <div class="dm-track">
         <div class="dm-fill"></div>
         <div class="dm-marker"></div>
@@ -237,190 +453,225 @@
       </div>
     </div>
   </div>
-
-  <!-- CONSENSUS TRAP -->
-  <section id="framework">
-    <div class="section-tag">The Problem</div>
-    <h2 class="section-h">The Consensus Trap</h2>
-    <p class="section-sub">
-      Most research systems are not designed to find the next paradigm.
-      They are designed to optimize within the current one.
-      The result is a gravitational pull that filters out world-changing ideas
-      before they can be properly evaluated.
-    </p>
-    <div class="trap-grid">
-      <div class="trap-card bad">
-        <div class="trap-card-label">The trap</div>
-        <p>Systems built to reward <strong>incremental improvement</strong>, benchmark conformity, and reproducibility systematically discard ideas that perform poorly against metrics designed by the paradigm they are replacing.</p>
-      </div>
-      <div class="trap-card good">
-        <div class="trap-card-label">The response</div>
-        <p>Instead of asking <strong>"is this correct?"</strong> — ask how far it is from validation, what assumptions it challenges, and what the exact cost to close the gap would be. Measure the distance. Let humans cross it.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CARTOGRAPHIC INSTRUMENT -->
-  <section>
-    <div class="section-tag">The Vision</div>
-    <h2 class="section-h">A Cartographic Instrument</h2>
-    <p class="section-sub">
-      SDM is not a recommendation engine. It is not a debate system.
-      It is an instrument that maps the frontier between theoretical possibility
-      and validated truth — and preserves every measurement for the record.
-    </p>
-    <div class="quote-block" style="padding: 0; text-align: left; margin-bottom: 40px;">
-      <div class="quote-text" style="font-size: 18px;">"A precisely measured distance between an idea and validation is often more valuable than the proposal itself."</div>
-    </div>
-    <p style="font-size: 14px; line-height: 1.8; color: var(--fog); font-weight: 300;">
-      Ideas change. Infrastructure evolves. A proposal that is impossible today may be foundational tomorrow.
-      But the measurement — taken against the empirical landscape of this moment — retains its value
-      as the world changes around it. The Dissent Archive is not a graveyard.
-      It is a time-delayed research queue.
-    </p>
-  </section>
-
-  <!-- DISRUPTOR EXCHANGE -->
-  <section id="exchange">
-    <div class="section-tag">The Process</div>
-    <h2 class="section-h">The Disruptor Exchange</h2>
-    <p class="section-sub">
-      Three specialized agents. Paradigmatically opposed. Structurally isolated.
-      No shared memory. No consensus pressure. Only adversarial pressure —
-      and a complete record of how it played out.
-    </p>
-    <div class="agents-grid">
-      <div class="agent-card d1">
-        <div class="agent-id">D1</div>
-        <div class="agent-name">Radical Proposer</div>
-        <div class="agent-desc">Recombines existing tools, mathematical structures, and hardware realities into coherent but premature proposals. Radical in direction. Disciplined in method. Every proposal includes a minimal testable experiment.</div>
-        <div class="agent-method">Method: <span>Recombination + Constraint-Driven Refactoring</span></div>
-      </div>
-      <div class="agent-card d2">
-        <div class="agent-id">D2</div>
-        <div class="agent-name">Dialectical Challenger</div>
-        <div class="agent-desc">Does not defend the status quo — and does not accept D1's alternatives either. Identifies the hidden assumption D1 failed to escape, then advances a competing proposal from a fundamentally different paradigm.</div>
-        <div class="agent-method">Method: <span>Paradigm Separation + Reinterpretation</span></div>
-      </div>
-      <div class="agent-card d3">
-        <div class="agent-id">D3</div>
-        <div class="agent-name">Empirical Arbiter</div>
-        <div class="agent-desc">Anchored to current hardware, tooling, and engineering reality. Does not synthesize. Does not philosophize. Measures the gap between each proposal and practical validation — then states the exact conditions to close it.</div>
-        <div class="agent-method">Method: <span>Systematic Elimination + Distance Measurement</span></div>
-      </div>
-    </div>
-
-    <div class="exchange-flow" style="margin-top: 40px;">
-      <div class="ex-step"><div class="ex-step-num active">1</div><div class="ex-step-label">D1 Proposal</div></div>
-      <div class="ex-arrow">→</div>
-      <div class="ex-step"><div class="ex-step-num active">2</div><div class="ex-step-label">D2 Critique + Counter</div></div>
-      <div class="ex-arrow">→</div>
-      <div class="ex-step"><div class="ex-step-num active">3</div><div class="ex-step-label">D1 Review Notes</div></div>
-      <div class="ex-arrow">→</div>
-      <div class="ex-step"><div class="ex-step-num active">4</div><div class="ex-step-label">Package Assembly</div></div>
-      <div class="ex-arrow">→</div>
-      <div class="ex-step"><div class="ex-step-num active">5</div><div class="ex-step-label">D3 Arbitration</div></div>
-      <div class="ex-arrow">→</div>
-      <div class="ex-step"><div class="ex-step-num" style="border-color:var(--green);color:var(--green);">H</div><div class="ex-step-label">HITL Review</div></div>
-    </div>
-  </section>
-
-  <!-- TRUTH IS EARNED -->
-  <section>
-    <div class="section-tag">The Principle</div>
-    <h2 class="section-h">Truth is Earned</h2>
-    <p class="section-sub">
-      Nothing in this system is true because an AI said it.
-      The Promotion Boundary is not ceremonial. It is the only gate
-      that converts validated reasoning into system memory.
-    </p>
-    <div class="truth-grid">
-      <div class="truth-step">
-        <div class="truth-step-n">01</div>
-        <div class="truth-step-title">Adversarial Pressure</div>
-        <div class="truth-step-desc">Every proposal survives a structured five-step exchange under challenge from a paradigmatically opposed agent before advancing.</div>
-      </div>
-      <div class="truth-step">
-        <div class="truth-step-n">02</div>
-        <div class="truth-step-title">Source-Locked Evidence</div>
-        <div class="truth-step-desc">Every substantive claim carries a Material Warrant — a typed, traceable, source-locked record. No source, no claim. No exceptions.</div>
-      </div>
-      <div class="truth-step">
-        <div class="truth-step-n">03</div>
-        <div class="truth-step-title">Human Approval</div>
-        <div class="truth-step-desc">The human reviewer receives the complete exchange — not a summary. They decide whether the measured distance is worth crossing.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BEHAVIORAL GOVERNANCE -->
-  <section>
-    <div class="section-tag">The Governance</div>
-    <h2 class="section-h">The Pattern Stays the Same</h2>
-    <p class="section-sub">
-      The same behavioral governance substrate that enforces agent boundaries in a research exchange also governs servicers in financial compliance and providers in healthcare authorization. The actor changes. The enforcement pattern does not.
-    </p>
-    <div class="bdrm-layers">
-      <div class="bdrm-layer"><div class="bdrm-n">01</div><div class="bdrm-name">Capture</div><div class="bdrm-tagline">Track actions, not intent — every event logged in real time</div></div>
-      <div class="bdrm-layer"><div class="bdrm-n">02</div><div class="bdrm-name">Pattern</div><div class="bdrm-tagline">A single deviation is noise — repetition across context is signal</div></div>
-      <div class="bdrm-layer"><div class="bdrm-n">03</div><div class="bdrm-name">Compare</div><div class="bdrm-tagline">Not "is this bad?" — "does this deviate from defined norms?"</div></div>
-      <div class="bdrm-layer"><div class="bdrm-n">04</div><div class="bdrm-name">Score</div><div class="bdrm-tagline">Probability expressed as discrete, auditable states — not opaque floats</div></div>
-      <div class="bdrm-layer"><div class="bdrm-n">05</div><div class="bdrm-name">Gate</div><div class="bdrm-tagline">Detection without enforcement is just an alert system</div></div>
-    </div>
-    <div class="bdrm-founder">
-      <strong>"The pattern stays the same. The output changes."</strong>
-      <span style="color: var(--fog);"> — The founding principle of behavioral governance across every domain the framework operates in.</span>
-    </div>
-  </section>
-
-  <!-- PROOF OF CONCEPT -->
-  <section id="proof">
-    <div class="section-tag">Proof of Concept</div>
-    <h2 class="section-h">Already at the Frontier</h2>
-    <p class="section-sub">
-      The framework is not theoretical. It has been exercised on real problems
-      and produced findings that conventional pipelines consistently miss.
-    </p>
-    <div class="proof-cards">
-      <div class="proof-card">
-        <div class="proof-domain">Hardware / AI</div>
-        <div class="proof-title">FPGA Design Space Exploration</div>
-        <div class="proof-desc">Applied to FPGA resource allocation for edge AI CNN deployment on AMD-Xilinx ZC706. The exchange surfaced a non-linear trade-off that conventional optimization pipelines smoothed over.</div>
-        <div class="proof-finding">Finding: BRAM saturation anomaly at 25-thread configurations — a counter-intuitive hardware constraint invisible to linear optimization approaches.</div>
-      </div>
-      <div class="proof-card">
-        <div class="proof-domain">AI Architecture</div>
-        <div class="proof-title">Attention Mechanism Replacement</div>
-        <div class="proof-desc">Two live exchange runs with different model-role permutations explored discrete-structural versus continuous-dynamic paradigms for replacing transformer attention.</div>
-        <div class="proof-finding">Finding: Cross-run convergence confirmed the paradigm split as a structural feature of the problem — not a model artifact. Archived trajectory preserved with specific revisitation conditions.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CALL TO INVOLVEMENT -->
-  <section style="border-top: none; padding-top: 0;">
-    <div class="cta-block">
-      <h2>The Human Cartographer</h2>
-      <p>The system measures the frontier. Humans decide which distances are worth crossing. We are building a community that values structured dissent over forced consensus.</p>
-      <div class="cta-actions">
-        <a href="https://github.com/GP1008/SDM" class="btn-primary">Join on GitHub</a>
-        <a href="https://notebooklm.google.com/notebook/0f50df41-0a1a-4b1d-b5b3-9fcf001c63ea" class="btn-secondary">Interrogate the Corpus ↗</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="quote-block">
-    <div class="quote-text">"Truth without adversarial pressure<br>is just consensus with better marketing."</div>
-    <div class="quote-attr">— Gary Phillips, ElosiaEcosystem Inc.</div>
-  </div>
-
 </div>
 
+<!-- WHISPER BANNER -->
+<div class="whisper-banner reveal">
+  <div class="whisper-quote">
+    "A precisely measured distance between an idea and validation is often more valuable than the proposal itself."
+  </div>
+  <div class="whisper-attr">// The founding principle of Structured Distance Measurement</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONSENSUS TRAP -->
+<div class="section-wrap" id="framework">
+  <div class="section-eyebrow">01 / The Problem</div>
+  <h2>The Consensus Trap</h2>
+  <p class="section-lead">
+    Most research systems are not designed to find the next paradigm.
+    They are designed to optimize within the current one — filtering out world-changing ideas
+    before they can be properly evaluated.
+  </p>
+  <div class="trap-grid reveal">
+    <div class="trap-card bad">
+      <div class="trap-card-label">The Trap</div>
+      <p>Systems built to reward <strong>incremental improvement</strong>, benchmark conformity, and reproducibility systematically discard ideas that perform poorly against metrics designed by the paradigm they are replacing.</p>
+    </div>
+    <div class="trap-card good">
+      <div class="trap-card-label">The Response</div>
+      <p>Instead of asking <strong>"is this correct?"</strong> — ask how far it is from validation, what assumptions it challenges, and what the exact cost to close the gap would be. Measure the distance. Let humans cross it.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CARTOGRAPHIC INSTRUMENT -->
+<div class="section-wrap">
+  <div class="section-eyebrow">02 / The Vision</div>
+  <h2>A Cartographic Instrument</h2>
+  <p class="section-lead">
+    SDM is not a recommendation engine. It is not a debate system.
+    It is an instrument that maps the frontier between theoretical possibility
+    and validated truth — and preserves every measurement for the record.
+  </p>
+  <p class="reveal" style="font-size: 15px; line-height: 1.8; color: var(--text-dim); font-weight: 300; max-width: 640px;">
+    Ideas change. Infrastructure evolves. A proposal that is impossible today may be foundational tomorrow.
+    But the measurement — taken against the empirical landscape of this moment — retains its value
+    as the world changes around it. The Dissent Archive is not a graveyard.
+    It is a time-delayed research queue.
+  </p>
+</div>
+
+<div class="divider"></div>
+
+<!-- DISRUPTOR EXCHANGE -->
+<div class="section-wrap" id="exchange">
+  <div class="section-eyebrow">03 / The Process</div>
+  <h2>The Disruptor Exchange</h2>
+  <p class="section-lead">
+    Three specialized agents. Paradigmatically opposed. Structurally isolated.
+    No shared memory. No consensus pressure. Only adversarial pressure —
+    and a complete record of how it played out.
+  </p>
+
+  <div class="agents-grid reveal">
+    <div class="agent-card d1">
+      <div class="agent-id">D1</div>
+      <div class="agent-name">Radical Proposer</div>
+      <div class="agent-desc">Recombines existing tools, mathematical structures, and hardware realities into coherent but premature proposals. Radical in direction. Disciplined in method. Every proposal includes a minimal testable experiment.</div>
+      <div class="agent-method">Method: <span>Recombination + Constraint-Driven Refactoring</span></div>
+    </div>
+    <div class="agent-card d2">
+      <div class="agent-id">D2</div>
+      <div class="agent-name">Dialectical Challenger</div>
+      <div class="agent-desc">Does not defend the status quo — and does not accept D1's alternatives either. Identifies the hidden assumption D1 failed to escape, then advances a competing proposal from a fundamentally different paradigm.</div>
+      <div class="agent-method">Method: <span>Paradigm Separation + Reinterpretation</span></div>
+    </div>
+    <div class="agent-card d3">
+      <div class="agent-id">D3</div>
+      <div class="agent-name">Empirical Arbiter</div>
+      <div class="agent-desc">Anchored to current hardware, tooling, and engineering reality. Does not synthesize. Does not philosophize. Measures the gap between each proposal and practical validation — then states the exact conditions to close it.</div>
+      <div class="agent-method">Method: <span>Systematic Elimination + Distance Measurement</span></div>
+    </div>
+  </div>
+
+  <div class="exchange-flow reveal">
+    <div class="ex-step"><div class="ex-step-num active">1</div><div class="ex-step-label">D1 Proposal</div></div>
+    <div class="ex-arrow">→</div>
+    <div class="ex-step"><div class="ex-step-num active">2</div><div class="ex-step-label">D2 Critique + Counter</div></div>
+    <div class="ex-arrow">→</div>
+    <div class="ex-step"><div class="ex-step-num active">3</div><div class="ex-step-label">D1 Review Notes</div></div>
+    <div class="ex-arrow">→</div>
+    <div class="ex-step"><div class="ex-step-num active">4</div><div class="ex-step-label">Package Assembly</div></div>
+    <div class="ex-arrow">→</div>
+    <div class="ex-step"><div class="ex-step-num active">5</div><div class="ex-step-label">D3 Arbitration</div></div>
+    <div class="ex-arrow">→</div>
+    <div class="ex-step"><div class="ex-step-num hitl">H</div><div class="ex-step-label">HITL Review</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TRUTH IS EARNED -->
+<div class="section-wrap">
+  <div class="section-eyebrow">04 / The Principle</div>
+  <h2>Truth is Earned</h2>
+  <p class="section-lead">
+    Nothing in this system is true because an AI said it.
+    The Promotion Boundary is not ceremonial — it is the only gate
+    that converts validated reasoning into system memory.
+  </p>
+  <div class="truth-grid reveal">
+    <div class="truth-step">
+      <div class="truth-step-n">01 / Adversarial Pressure</div>
+      <div class="truth-step-title">Every proposal survives the exchange</div>
+      <div class="truth-step-desc">A structured five-step exchange under challenge from a paradigmatically opposed agent before anything advances.</div>
+    </div>
+    <div class="truth-step">
+      <div class="truth-step-n">02 / Source-Locked Evidence</div>
+      <div class="truth-step-title">No source, no claim</div>
+      <div class="truth-step-desc">Every substantive claim carries a Material Warrant — a typed, traceable, source-locked record. No exceptions.</div>
+    </div>
+    <div class="truth-step">
+      <div class="truth-step-n">03 / Human Approval</div>
+      <div class="truth-step-title">Humans receive the full exchange</div>
+      <div class="truth-step-desc">The reviewer receives the complete record — not a summary. They decide whether the measured distance is worth crossing.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- BEHAVIORAL GOVERNANCE -->
+<div class="section-wrap">
+  <div class="section-eyebrow">05 / The Governance</div>
+  <h2>The Pattern Stays the Same</h2>
+  <p class="section-lead">
+    The same behavioral governance substrate that enforces agent boundaries in a research exchange
+    also governs servicers in financial compliance and providers in healthcare authorization.
+    The actor changes. The enforcement pattern does not.
+  </p>
+  <div class="bdrm-stack reveal">
+    <div class="bdrm-layer"><div class="bdrm-n">01</div><div class="bdrm-name">Capture</div><div class="bdrm-tagline">Track actions, not intent — every event logged in real time</div></div>
+    <div class="bdrm-layer"><div class="bdrm-n">02</div><div class="bdrm-name">Pattern</div><div class="bdrm-tagline">A single deviation is noise — repetition across context is signal</div></div>
+    <div class="bdrm-layer"><div class="bdrm-n">03</div><div class="bdrm-name">Compare</div><div class="bdrm-tagline">Not "is this bad?" — "does this deviate from defined norms?"</div></div>
+    <div class="bdrm-layer"><div class="bdrm-n">04</div><div class="bdrm-name">Score</div><div class="bdrm-tagline">Probability expressed as discrete, auditable states — not opaque floats</div></div>
+    <div class="bdrm-layer"><div class="bdrm-n">05</div><div class="bdrm-name">Gate</div><div class="bdrm-tagline">Detection without enforcement is just an alert system</div></div>
+  </div>
+  <div class="bdrm-founder reveal">
+    "The pattern stays the same. The output changes."
+    <div class="bdrm-founder-attr">// The founding principle of behavioral governance across every domain the framework operates in</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROOF OF CONCEPT -->
+<div class="section-wrap" id="proof">
+  <div class="section-eyebrow">06 / Proof of Concept</div>
+  <h2>Already at the Frontier</h2>
+  <p class="section-lead">
+    The framework is not theoretical. It has been exercised on real problems
+    and produced findings that conventional pipelines consistently miss.
+  </p>
+  <div class="proof-cards reveal">
+    <div class="proof-card">
+      <div class="proof-domain">Hardware / AI</div>
+      <div class="proof-title">FPGA Design Space Exploration</div>
+      <div class="proof-desc">Applied to FPGA resource allocation for edge AI CNN deployment on AMD-Xilinx ZC706. The exchange surfaced a non-linear trade-off that conventional optimization pipelines smoothed over.</div>
+      <div class="proof-finding">BRAM saturation anomaly at 25-thread configurations — a counter-intuitive hardware constraint invisible to linear optimization approaches.</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-domain">AI Architecture</div>
+      <div class="proof-title">Attention Mechanism Replacement</div>
+      <div class="proof-desc">Two live exchange runs with different model-role permutations explored discrete-structural versus continuous-dynamic paradigms for replacing transformer attention.</div>
+      <div class="proof-finding">Cross-run convergence confirmed the paradigm split as a structural feature of the problem — not a model artifact. Archived trajectory preserved with specific revisitation conditions.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section" id="cta">
+  <div class="section-eyebrow" style="text-align:center; margin-bottom: 16px;">07 / Engage</div>
+  <h2>The Human <em>Cartographer</em></h2>
+  <p class="section-lead">
+    The system measures the frontier. Humans decide which distances are worth crossing.
+    We are building a community that values structured dissent over forced consensus.
+  </p>
+  <div class="cta-actions">
+    <a href="https://github.com/GP1008/SDM" class="btn-primary">Join on GitHub</a>
+    <a href="https://notebooklm.google.com/notebook/0f50df41-0a1a-4b1d-b5b3-9fcf001c63ea" class="btn-ghost">Interrogate the Corpus ↗</a>
+  </div>
+  <div style="margin-top: 48px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <span class="tag">Open Research</span>
+    <span class="tag tag-teal">Adversarial Validation</span>
+    <span class="tag tag-blue">Human-in-the-Loop</span>
+    <span class="tag">CC BY-NC 4.0</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Elosia SDM</div>
-  <div>Gary Phillips — ElosiaEcosystem Inc. — May 2026</div>
-  <div>CC BY-NC 4.0 Conceptual Layer</div>
+  <div class="footer-note">Elosia SDM — Structured Distance Measurement · v1.0 · May 2026</div>
+  <div class="footer-note">Gary Phillips — ElosiaEcosystem Inc.</div>
+  <div class="footer-note">CC BY-NC 4.0 Conceptual Layer</div>
 </footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
